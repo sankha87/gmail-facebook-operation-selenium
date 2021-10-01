@@ -1,0 +1,29 @@
+package operations;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class FacebookOperation {
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "C:\\browser drivers\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("http://www.fb.com");
+		String expectedTitle = "Facebook";
+		Dimension d = new Dimension(1300,700);
+		driver.manage().window().setSize(d);
+		driver.findElement(By.partialLinkText("English")).click();
+		driver.findElement(By.cssSelector("input[class='inputtext _55r1 _6luy']")).sendKeys("sankha.cse@gmail.com");		
+		driver.findElement(By.cssSelector("input[class='inputtext _55r1 _6luy _9npi']")).sendKeys("fear2k38");
+		driver.findElement(By.cssSelector("button[class='_42ft _4jy0 _6lth _4jy6 _4jy1 selected _51sy']")).click();
+		Thread.sleep(3000);
+		String actualTitle = driver.getTitle();
+		System.out.println(actualTitle);
+		if(actualTitle.contains(expectedTitle))
+			System.out.println("Title matching");
+		else
+			System.out.println("Title not matching");
+	}
+}
