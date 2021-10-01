@@ -1,0 +1,31 @@
+package operations;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class GmailOperation {
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "C:\\browser drivers\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("http://www.gmail.com");
+		Dimension d = new Dimension(1300,700);
+		driver.manage().window().setSize(d);
+		String expectedError = "Couldn't find your Google Account";
+		WebElement userName = driver.findElement(By.id("identifierId"));
+		userName.sendKeys("ajefwubfk28346");
+		Thread.sleep(2000);
+		userName.clear();
+		userName.sendKeys("bjegsfjeg876876876");
+		WebElement nextBtn = driver.findElement(By.xpath("//span[text()='Next']"));
+		nextBtn.click();
+		Thread.sleep(3000);
+		WebElement errorMsg = driver.findElement(By.xpath("//div[contains(text(),'find your Google Account')]"));
+		String actualError = errorMsg.getText();
+		if(actualError.equals(expectedError))
+			System.out.println("Error message is validated");
+		else
+			System.out.println("Error message is not validated");
+	}
+}
